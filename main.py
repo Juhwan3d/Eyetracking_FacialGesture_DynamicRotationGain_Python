@@ -91,22 +91,16 @@ def result_callback(result: FaceLandmarkerResult, output_image: mp.Image, timest
     rmat, jac = cv2.Rodrigues(rotation_vec)
     angles, mtxR, mtxQ, Qx, Qy, Qz = cv2.RQDecomp3x3(rmat)
 
-    x = np.degrees(angles[0])
-    y = np.degrees(angles[1])
-    z = np.degrees(angles[2])
+    y = angles[1] * 360
 
     # Here based on axis rot angle is calculated
-    # if y < -10:
-    #     print("Looking Right")
-    # elif y > 10:
-    #     print("Looking Left")
-    # elif x < -10:
-    #     print("Looking Down")
-    # elif x > 10:
-    #     print("Looking Up")
-    # else:
-    #     print("Looking Forward")
-    # print(f"x: {x}, y: {y}, z: {z}")
+    if y < -10:
+        print("Looking Right")
+    elif y > 10:
+        print("Looking Left")
+    else:
+        print("Looking Forward")
+    print(f"y: {y}")
 
 
 options = FaceLandmarkerOptions(
